@@ -1,0 +1,110 @@
+<!doctype html>
+<meta charset="UTF-8"> 
+<html lang="da">
+  <head>
+   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <style>
+      #map {
+        height: 600px;
+        width: 50%;
+      }
+    </style>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+    <script src="data.js"></script>
+    <title>Økologisk FødevareFællesskab Esbjerg - Lokal økologi til dig</title>
+  </head>
+  <body>
+Velkommen til 
+    <h1>ØFFE - Økologisk FødevareFællesskab Esbjerg</h1>
+    <h2>Hvad er ØFFE?</h2>
+    En forening af forbrugere i Esbjerg og omegn, der ønsker øgede muligheder for at forbruge lokalt producerede økologiske fødevarer.
+    <br>Som medlem har man mulighed for at bestille friske grøntsager og andre varer (pt. æg og mel) til udlevering hver 14. dag (på torsdage i lige uger).
+    <h2>Bliv medlem</h2>
+    Indmeldelse i foreningen koster 100 kr. Da ØFFE er et fællesskab uden profit til formål, er den eneste arbejdskraft medlemmernes egen, derfor forventes det at man som medlem bidrager til driften af foreningen. Dette kunne f.eks. være hjælp til administration, bestilling, afhentning, udlevering o.l. 
+<p />
+Send en email til <a href="mailto:oeffesbjerg@gmail.com?subject=Indmelding">oeffesbjerg@gmail.com</a> og du vil modtage indmeldingsblanket.
+<h2>Bestilling</h2>
+
+Du udfører en bestilling ved at sammensætte en bestillingskode som svarer til de ønskede varer efter nendenstående skema. Dernæst udfører du den ved at overføre det samlede beløb via en af nedenstående metoder, og angiver bestilingskoden som overførelsesmeddelelse.
+
+<em>Bank:</em> Merkur Andelskasse, reg. nr. 8401, konto nr.: 1296559
+<em>MobilePay:</em> 61 60 90 64 (udgår snarest)
+<em>Swipp:</em> ?? ?? ?? ?? (på vej)
+
+<em>Eksempel</em>
+Hvis medlem nr. 17 vil købe 2 kg. Ølandshvede og 1 kg. Ølandsperler og 2 poser grøntsager angiver bestillingskoden
+<nr>
+17 2 ØH 1 ØP 2 P<br>
+(medlemsnummer) (antal) (kode)
+<br>
+    <img border=1 src="bestilling.jpg"></img>
+    <h2>Betaling</h2>
+Merkur Andelskasse reg. nr. 8401, konto nr.: 1296559
+    <h2>Kontakt</h2>
+    <em>Email:</em> <a href="mailto:oeffesbjerg@gmail.com">oeffesbjerg@gmail.com</a><br>
+    <em>Facebook:</em> <a href="https://www.facebook.com/groups/997317766980298/">facebook.com/groups/997317766980298/</a>
+    <h2>Vagtplan</h2>
+<a href="https://docs.google.com/spreadsheets/d/1q4PP7PwrlwjWE7fnIZGrY9fLvLWueL0otKDgPj9-BuM/edit#gid=0">Se vagtplanen</a> i Google Docs, skriv dig gerne på opgaver.
+    <h2>ØFFE's producenter og udleveringssteder</h2>
+    <div id="map"></div>
+
+    <h2>Producenter</h2>
+    <div id="lev_list"></div>
+
+    <h2>Udleveringssteder</h2>
+    <div id="udlev_list"></div>
+
+    <script type="text/javascript">
+      function genDesc(lev) {
+        return  '<b>'+lev.name+'</b>'
+               +'<br>'+lev.desc
+               +(lev.goods?'<br>Produkter: '+lev.goods.join(', '):'')
+               +'<br><a href=\''+lev.url+'\'>'+lev.url+'</a>';
+      }
+      // lat/lon could be retrieved from nominatim directly from street address;
+      // wget -O- --quiet "nominatim.openstreetmap.org/search?format=json&q=kirkegade 70, 6700 Esbjerg"
+
+      var map = L.map('map').setView([55.55, 8.5], 11);
+
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> bidragsydere'
+      }).addTo(map);
+
+//      var lev_icon = L.MakiMarkers.icon({icon: "farm", color: "#aa0", size: "l"});
+//      var lev_icon = L.icon({iconUrl: "https://github.com/mapbox/maki/raw/master/icons/farm-11.svg"});
+      leverandoerer.forEach(function (entry) {
+        lev_desc=genDesc(entry);
+//        L.marker(entry.pos, {title: entry.name, icon: lev_icon}).addTo(map)
+        L.marker(entry.pos, {title: entry.name}).addTo(map)
+          .bindPopup('Producent<br>'+lev_desc)
+          //.openPopup();
+        document.getElementById('lev_list').innerHTML += '<p>'+lev_desc;
+      });
+
+//      var udlev_icon = L.MakiMarkers.icon({icon: "shop", color: "#0aa", size: "l"});
+//      var udlev_icon = L.icon({iconUrl: "https://github.com/mapbox/maki/raw/master/icons/shop-11.svg"});
+      udlevering.forEach(function (entry) {
+        udlev_desc=genDesc(entry)
+//        L.marker(entry.pos, {title: entry.name, icon: udlev_icon}).addTo(map)
+        L.marker(entry.pos, {title: entry.name}).addTo(map)
+          .bindPopup('Udleveringssted<br>'+udlev_desc)
+          //.openPopup();
+        document.getElementById('udlev_list').innerHTML += '<p>'+udlev_desc;
+      });
+
+      var ring_colors=['green','yellow','red'];
+      for(var i=1; i<10; i++) {
+        dist=i*5000;
+        L.circle(udlevering[1].pos, dist, {
+          color: ring_colors[(i-1)%ring_colors.length],
+          fill: false,
+        })
+        .addTo(map)
+        .bindPopup(dist/1000+' km fra Esbjerg')
+        //.openPopup()
+        ;
+      }
+    </script>
+  </body>
+</html>
