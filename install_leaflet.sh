@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # Get and extract leaflet distribtion
 if [ ! -d leaflet ]; then
     mkdir leaflet
