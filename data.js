@@ -7,7 +7,7 @@
 
      var udlevering = [
           {name: "Midtgård, ØFFE HQ", desc: "Ravnsbjergparken 6, 6710 Esbjerg V", pos: [55.5314459,8.4368876], url: "http://øffe.tk/"}
-        // wget -O- --quiet "nominatim.openstreetmap.org/search?format=json&q=kirkegade 70, 6700 Esbjerg"
-        , {name: "KFUM/KFUK", desc: "Kirkegade 70, 6700 Esbjerg", pos: [55.471686,8.450611], url: "http://esbjerg.kfum-kfuk.dk/"}
+	 // wget wget -O- --quiet "nominatim.openstreetmap.org/search?format=json&q=Holger Drachmanns Alle 16, 6700 Esbjerg"
+        , {name: "Esbjerg Ø", desc: "Holger Drachmans Alle 16, 6705 Esbjerg", pos: [55.472998,8.465916], url: }
      ];
 
