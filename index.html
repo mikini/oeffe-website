@@ -2,15 +2,14 @@
 <meta charset="UTF-8"> 
 <html lang="da">
   <head>
-   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <script src="leaflet/leaflet.js"></script>
     <style>
       #map {
         height: 600px;
         width: 50%;
       }
     </style>
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-
     <script src="data.js"></script>
     <title>Økologisk FødevareFællesskab Esbjerg - Lokal økologi til dig</title>
   </head>
@@ -24,27 +23,32 @@ Velkommen til
     Indmeldelse i foreningen koster 100 kr. Da ØFFE er et fællesskab uden profit til formål, er den eneste arbejdskraft medlemmernes egen, derfor forventes det at man som medlem bidrager til driften af foreningen. Dette kunne f.eks. være hjælp til administration, bestilling, afhentning, udlevering o.l. 
 <p />
 Send en email til <a href="mailto:oeffesbjerg@gmail.com?subject=Indmelding">oeffesbjerg@gmail.com</a> og du vil modtage indmeldingsblanket.
+
 <h2>Bestilling</h2>
 
 Du udfører en bestilling ved at sammensætte en bestillingskode som svarer til de ønskede varer efter nendenstående skema. Dernæst udfører du den ved at overføre det samlede beløb via en af nedenstående metoder, og angiver bestilingskoden som overførelsesmeddelelse.
-
-<em>Bank:</em> Merkur Andelskasse, reg. nr. 8401, konto nr.: 1296559
-<em>MobilePay:</em> 61 60 90 64 (udgår snarest)
-<em>Swipp:</em> ?? ?? ?? ?? (på vej)
-
-<em>Eksempel</em>
-Hvis medlem nr. 17 vil købe 2 kg. Ølandshvede og 1 kg. Ølandsperler og 2 poser grøntsager angiver bestillingskoden
-<nr>
-17 2 ØH 1 ØP 2 P<br>
+<p>
+<strong>Bank:</strong> Merkur Andelskasse, reg. nr. 8401, konto nr.: 1296559
+<br>
+<strong>MobilePay:</strong> 61 60 90 64 (udgår snarest)
+<br>
+<strong>Swipp:</strong> ?? ?? ?? ?? (på vej)
+<p>
+<strong>Eksempel</strong>
+<br>
+Hvis medlem nr. 17 vil købe 2 kg. Ølandshvede og 1 kg. Ølandsperler og 2 poser grøntsager bruges bestillingskoden<br>
+"<strong>17 2 ØH 1 ØP 2 P</strong>"
+<br>
 (medlemsnummer) (antal) (kode)
 <br>
     <img border=1 src="bestilling.jpg"></img>
-    <h2>Betaling</h2>
-Merkur Andelskasse reg. nr. 8401, konto nr.: 1296559
+
     <h2>Kontakt</h2>
-    <em>Email:</em> <a href="mailto:oeffesbjerg@gmail.com">oeffesbjerg@gmail.com</a><br>
-    <em>Facebook:</em> <a href="https://www.facebook.com/groups/997317766980298/">facebook.com/groups/997317766980298/</a>
+    <strong>Email:</strong> <a href="mailto:oeffesbjerg@gmail.com">oeffesbjerg@gmail.com</a><br>
+    <strong>Facebook:</strong> <a href="https://www.facebook.com/groups/997317766980298/">facebook.com/groups/997317766980298/</a>
+
     <h2>Vagtplan</h2>
+
 <a href="https://docs.google.com/spreadsheets/d/1q4PP7PwrlwjWE7fnIZGrY9fLvLWueL0otKDgPj9-BuM/edit#gid=0">Se vagtplanen</a> i Google Docs, skriv dig gerne på opgaver.
     <h2>ØFFE's producenter og udleveringssteder</h2>
     <div id="map"></div>
