@@ -3,9 +3,13 @@
 // get configured email address
 require 'oeffemaildest';
 
-// secure the input
+// catch obvious fakers
+if (empty($_POST))
+   die ("Brug <a href='/#blivmedlem'>tilmeldingsformularen</a>, tak.\n");
+
+// Secure post input
 $securepost = array();
-$maxkeysize=0;
+$maxkeysize = 0;
 foreach($_POST as $key => $value)
 {
   $secure = array();
@@ -14,9 +18,9 @@ foreach($_POST as $key => $value)
   $securepost[$secure[0]] = $secure[1];
 
   if (strlen($secure[1]) == 0)
-    die ("Vi skal desværre bruge lidt mere information end du har angivet i feltet \"" . $secure[0] . "\", prøv venligst igen.");
+    die ("Vi skal desværre bruge lidt mere information end du har angivet i feltet \"" . $secure[0] . "\", prøv venligst igen.\n");
   if (strlen($secure[1]) > 100 || strlen($secure[0]) > 100)
-    die ("Vi har ikke brug for så mange data som du forsøger at sende.");
+    die ("Vi har ikke brug for så mange data som du forsøger at sende.\n");
 
   // save length of longest key
   if (strlen($secure[0]) > $maxkeysize)
