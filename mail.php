@@ -67,7 +67,7 @@ Hej $name.
 
 Tak for din indmelding, du er godt på vej til at blive medlem af ØFFE.
 
-Som beskrevet på hjemmesiden skal du nu sørge for at indbetale indmeldingsgebyret, se hvorledes på http://øffe.tk/#blivmedlem. Vi vil vende tilbage til dig når vi har bekræftet indbetalingen, hvorefter du vil få tilsendt et medlemsnummer så du kan komme i gang med at bestille dejlige lokale fødevarer. Forvent op til en uges ekspeditionstid.
+Som beskrevet på hjemmesiden skal du nu sørge for at indbetale kontingent, se hvorledes på http://øffe.tk/#blivmedlem. Vi vil vende tilbage til dig når vi har bekræftet indbetalingen, hvorefter du vil få tilsendt et medlemsnummer så du kan komme i gang med at bestille dejlige lokale fødevarer. Forvent op til en uges ekspeditionstid.
 
 Har du problemer eller spørgsmål, så svar blot på denne email eller spørg evt. i gruppen på Facebook (se http://øffe.tk/#kontakt).
 
@@ -78,7 +78,7 @@ $data
 Økologiske hilsner
 ØFFE
 
-PS: indmeldingen blev foretaget fra IP-adressen $ip med browseren "$agent".  
+PS: indmeldingen blev foretaget fra IP-adressen $ip med browseren "$agent".
 EOF;
 
 // Generate page output
@@ -95,8 +95,9 @@ $htmlmsg
 EOF;
 
 // send mails
-$headers =  "Content-Type: text/plain; charset=UTF-8\n"
-         .  "From: =?UTF-8?B?" . base64_encode("Økologisk FødevareFællesskab Esbjerg") . "?= <oeffesbjerg@gmail.com>\n";
-mail($securepost['email'], '[ØFFE] Velkommen som medlem', $msg, $headers);
+//$headers  =  "Content-Type: text/plain; charset=UTF-8\n";
+$headers =  "From: Økologisk FødevareFællesskab Esbjerg <oeffesbjerg@gmail.com>\n";
+mb_language("uni");
+mb_send_mail($securepost['email'], '[ØFFE] Velkommen som medlem', $msg, $headers);
 foreach($oeffemaildest as $maildest)
   mail($maildest, $mailsubject, $mailbody, $headers);
