@@ -96,8 +96,8 @@ EOF;
 
 // send mails
 //$headers  =  "Content-Type: text/plain; charset=UTF-8\n";
-$headers =  "From: Økologisk FødevareFællesskab Esbjerg <oeffesbjerg@gmail.com>\n";
+$headers = "From: =?UTF-8?B?" . base64_encode("Økologisk FødevareFællesskab Esbjerg") . "?= <oeffesbjerg@gmail.com>\n";
 mb_language("uni");
 mb_send_mail($securepost['email'], '[ØFFE] Velkommen som medlem', $msg, $headers);
 foreach($oeffemaildest as $maildest)
-  mail($maildest, $mailsubject, $mailbody, $headers);
+  mb_send_mail($maildest, $mailsubject, $mailbody, $headers);
